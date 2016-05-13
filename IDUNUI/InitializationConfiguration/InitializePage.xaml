@@ -8,6 +8,33 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <StackPanel>
+            <StackPanel>
+                <TextBlock Text="Application requires Initialization process." TextWrapping="Wrap"></TextBlock>
+                <TextBlock Text="Initialization will enable Devices' indentification in the Cloud." TextWrapping="Wrap"></TextBlock>
+                <Button Content="Initialize" Margin="5" Click="Initialize_Click"></Button>
+                <ListView x:Name="InitListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,5,0">Device Type:</TextBlock>
+                                    <TextBlock Text="{Binding DeviceType}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,5,0">User:</TextBlock>
+                                    <TextBlock Text="{Binding UserName}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,5,0">Date:</TextBlock>
+                                    <TextBlock Text="{Binding Date}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="ProceedButton" Content="Proceed" Margin="5" IsEnabled="False" Click="ProceedButton_Click"></Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

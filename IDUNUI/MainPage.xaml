@@ -15,6 +15,7 @@
                     <Image x:Name="HeaderImage" Width="35" Height="35" Margin="0,0,5,0"></Image>
                     <TextBlock x:Name="HeaderText"></TextBlock>
                 </StackPanel>
+                
             </Hub.Header>
             <HubSection x:Name="SectionOne">
                 <DataTemplate>
@@ -37,13 +38,7 @@
             </HubSection>
             <HubSection x:Name="SectionThree">
                 <DataTemplate>
-                    <ListView>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding ChildrenList}"></TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Frame Content="{Binding SelectedPage2, Mode=TwoWay}"></Frame>
                 </DataTemplate>
             </HubSection>
         </Hub>

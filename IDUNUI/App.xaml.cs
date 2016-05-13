@@ -1,5 +1,7 @@
-﻿using IDUNUI.InitializationConfiguration;
+﻿using IDUNUI.AppPages;
+using IDUNUI.InitializationConfiguration;
 using IDUNUI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,6 +39,12 @@ namespace IDUNUI
         public PasswordVault vault = new PasswordVault();
 
         public ObservableCollection<NavigationModel> Navigation = new ObservableCollection<NavigationModel>();
+        public ObservableCollection<CModel> Configuration = new ObservableCollection<CModel>();
+        public ObservableCollection<CModel> CMConfigList = new ObservableCollection<CModel>();
+
+        public ObservableCollection<InitializationModel> InitializationInformation = new ObservableCollection<InitializationModel>();
+
+        public CModel ParameterItem;
 
         public NavigationModel SelectedListItem { get; set; }
 
@@ -54,29 +62,69 @@ namespace IDUNUI
             InitializeCheck();
             ConfigurationCheck();
 
+
+
             if (!Credentialized) { Navigation.Add(new NavigationModel { ImagePath="Assets/Users.png", Page="Authorisation", PageType=typeof(LoginPage) }); }
             else
             {
                 if (!Initialized) { Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Initialization", PageType = typeof(InitializePage) }); }
                 else
                 {
-                    if (!Configured) { Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Configuration", PageType = typeof(ConfigurePage) }); }
+
+                    LoadInitialization();
+                    if (!Configured)
+                    {
+                        Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Configuration", PageType = typeof(ConfigurePage) });
+                        ConfigurationListFillout();
+                        CMConfigListFillout();
+           
+                    }
+                    else
+                    {
+                        Navigation.Add(new NavigationModel { ImagePath = "Assets/home.png", Page = "Home", PageType = typeof(HomePage) });
+                        Navigation.Add(new NavigationModel { ImagePath = "Assets/Finger.png", Page = "Usage", PageType = typeof(Usage) });
+                        Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Configuration", PageType = typeof(ConfigurePage) });
+                    }
                 }
             }
+
+
+            LoadInitialization();
+            LoadConfiguration();
+
+        }
+
+        public async void LoadInitialization()
+        {
+            StorageFile ConfigFile = await localFolder.GetFileAsync("Initialization.txt");
+            string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
+
+            InitializationInformation = JsonConvert.DeserializeObject<ObservableCollection<InitializationModel>>(ConfigText);
+        }
+
+        public async void LoadConfiguration()
+        {
+            
+
+            StorageFile ConfigFile = await localFolder.GetFileAsync("Configuration.txt");
+            string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
+
+            ConfigurationListFillout();
+            CMConfigList = JsonConvert.DeserializeObject<ObservableCollection<CModel>>(ConfigText);
+
+            
         }
 
         public void CredentialsCheck()
         {
             try
             {
-                //if it passes it will use saved username and password
                 var credList = vault.FindAllByResource("idun");
                 Credentialized = true;
             }
             catch (Exception)
             {
-                Credentialized = false; //if here show login page
-                //vault.Add(new PasswordCredential("idun", "alain", "alain")); <on the login button>
+                Credentialized = false;
             }
         }
 
@@ -111,6 +159,28 @@ namespace IDUNUI
             }
         }
 
+
+        public void ConfigurationListFillout()
+        {
+            Configuration.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", PageType = typeof(MeasurementConfig) });
+            Configuration.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", PageType = typeof(MeasurementConfig) });
+        }
+
+        public void CMConfigListFillout()
+        {
+            CMConfigList.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", Report = 1, Interval = 1000 });
+            CMConfigList.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", Report = 1, Interval = 1000 });
+        }
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.

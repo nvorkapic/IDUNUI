@@ -1,4 +1,5 @@
-﻿using IDUNUI.Models;
+﻿using IDUNUI.AppPages;
+using IDUNUI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,7 +43,16 @@ namespace IDUNUI
             get { return selectedPage; }
             set { selectedPage = value; Notify(); }
         }
+
+        private Page selectedPage2;
+        public Page SelectedPage2
+        {
+            get { return selectedPage2; }
+            set { selectedPage2 = value; Notify(); }
+        }
     }
+
+
 
     public sealed partial class MainPage : Page
     {
@@ -74,6 +85,11 @@ namespace IDUNUI
             ViewModel.SelectedPage = Activator.CreateInstance(T) as Page;
             
         }
+
+        public void Navigate2 (Type T)
+        {
+            ViewModel.SelectedPage2 = Activator.CreateInstance(T) as Page;
+        }
         
         private void ListViewSelectionOne_selectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -87,6 +103,7 @@ namespace IDUNUI
             HeaderText.Text = Config.Page;
 
             Navigate(Config.PageType);
+            Navigate2(typeof(Section3));
         }
 
         private void ContainerChange(ListViewBase sender, ContainerContentChangingEventArgs args)
@@ -94,5 +111,6 @@ namespace IDUNUI
             var listView = (ListView)sender;
             listView.SelectedIndex = 0;
         }
+
     }
 }

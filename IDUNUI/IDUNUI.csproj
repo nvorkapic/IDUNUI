@@ -95,6 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppPages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Section3.xaml.cs">
+      <DependentUpon>Section3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Usage.xaml.cs">
+      <DependentUpon>Usage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InitializationConfiguration\ConfigurePage.xaml.cs">
       <DependentUpon>ConfigurePage.xaml</DependentUpon>
     </Compile>
@@ -104,9 +113,14 @@
     <Compile Include="InitializationConfiguration\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InitializationConfiguration\MeasurementConfig.xaml.cs">
+      <DependentUpon>MeasurementConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CModel.cs" />
+    <Compile Include="Models\InitializationModel.cs" />
     <Compile Include="Models\NavigationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +131,15 @@
     <None Include="IDUNUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Accelerometer.png" />
+    <Content Include="Assets\Finger.png" />
+    <Content Include="Assets\gyro.png" />
+    <Content Include="Assets\gyrow.png" />
+    <Content Include="Assets\home.png" />
+    <Content Include="Assets\humidity.png" />
+    <Content Include="Assets\magnet.png" />
+    <Content Include="Assets\pressurex.png" />
+    <Content Include="Assets\thermo.png" />
     <Content Include="Assets\tools.png" />
     <Content Include="Assets\Users.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -133,6 +156,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AppPages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Section3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Usage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InitializationConfiguration\ConfigurePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,10 +180,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="InitializationConfiguration\MeasurementConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
