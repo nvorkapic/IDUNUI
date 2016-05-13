@@ -68,7 +68,7 @@ namespace IDUNUI.InitializationConfiguration
             ViewList.SelectedIndex = 0;
 
             var SelectedItem = ViewList.SelectedItem as CModel;
-            (Application.Current as App).ParameterItem = (Application.Current as App).CMConfigList.Where(x => x.Measurement == SelectedItem.Measurement).SingleOrDefault();
+            (Application.Current as App).ParameterItem = (Application.Current as App).CMConfigList.Where(x => x.Measurement == SelectedItem.Measurement).FirstOrDefault();
         }
 
         private void ListSelectionChange(object sender, SelectionChangedEventArgs e)
@@ -79,7 +79,7 @@ namespace IDUNUI.InitializationConfiguration
 
             if (Config == null) { return; }       
 
-            (Application.Current as App).ParameterItem = (Application.Current as App).CMConfigList.Where(x => x.Measurement == Config.Measurement).SingleOrDefault();
+            (Application.Current as App).ParameterItem = (Application.Current as App).CMConfigList.Where(x => x.Measurement == Config.Measurement).FirstOrDefault();
 
             (Application.Current as App).mainPage.Navigate2(Config.PageType);
         }
@@ -99,7 +99,6 @@ namespace IDUNUI.InitializationConfiguration
                 _rootApp.Configured = true;
 
                 _rootApp.Navigation.Remove(_rootApp.Navigation.Single(x => x.Page == "Configuration"));
-
                 _rootApp.Navigation.Add(new NavigationModel { ImagePath = "Assets/home.png", Page = "Home", PageType = typeof(HomePage) });
                 _rootApp.Navigation.Add(new NavigationModel { ImagePath = "Assets/Finger.png", Page = "Usage", PageType = typeof(Usage) });
                 _rootApp.Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Configuration", PageType = typeof(ConfigurePage) });

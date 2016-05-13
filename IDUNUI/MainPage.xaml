@@ -22,7 +22,7 @@
                     <ListView x:Name="ListViewSectionOne" Loaded="ListViewSectionOne_onLoad" SelectionChanged="ListViewSelectionOne_selectionChanged" SelectionMode="Single" ContainerContentChanging="ContainerChange" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
                                     <Image Source="{Binding ImagePath}" Width="25" Height="25" Margin="0,0,5,0"></Image>
                                     <TextBlock Text="{Binding Page}"></TextBlock>
                                 </StackPanel>

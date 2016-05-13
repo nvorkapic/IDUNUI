@@ -71,22 +71,28 @@ namespace IDUNUI.InitializationConfiguration
 
             _rootApp.mainPage.Navigate(typeof(ConfigurePage));
 
-            _rootApp.Configuration.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", PageType = typeof(MeasurementConfig) });
-            _rootApp.Configuration.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", PageType = typeof(MeasurementConfig) });
-
-
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", Report = 1, Interval = 1000 });
-            _rootApp.CMConfigList.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", Report = 1, Interval = 1000 });
+            if (_rootApp.Configuration.Count == 0)
+            {
+                _rootApp.Configuration.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", PageType = typeof(MeasurementConfig) });
+                _rootApp.Configuration.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", PageType = typeof(MeasurementConfig) });
+            }
+            
+            if (_rootApp.Initialized == false)
+            {
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Usage", Enabled = false, ImagePath = "/Assets/Finger.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Temperature", Enabled = false, ImagePath = "/Assets/thermo.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Pressure", Enabled = false, ImagePath = "/Assets/pressurex.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Humidity", Enabled = false, ImagePath = "/Assets/humidity.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Acceleration", Enabled = false, ImagePath = "/Assets/Accelerometer.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Magnetic Field", Enabled = false, ImagePath = "/Assets/magnet.png", Report = 1, Interval = 1000 });
+                _rootApp.CMConfigList.Add(new CModel { Measurement = "Gyroscope", Enabled = false, ImagePath = "/Assets/gyrow.png", Report = 1, Interval = 1000 });
+            }
+            
         }
     }
 }

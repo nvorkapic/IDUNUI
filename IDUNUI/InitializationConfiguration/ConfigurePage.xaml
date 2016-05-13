@@ -9,18 +9,20 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <ListView Loaded="onLoadList" SelectionChanged="ListSelectionChange">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding ImagePath}" Width="25" Height="25" Margin="0,0,5,0"></Image>
-                            <TextBlock Text="{Binding Measurement}" Margin="0,0,5,0"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button HorizontalAlignment="Right" Click="FinalizeConfig_Click" Loaded="onLoadBtn"></Button>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel>
+                <ListView Loaded="onLoadList" SelectionChanged="ListSelectionChange">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding ImagePath}" Width="25" Height="25" Margin="0,0,5,0"></Image>
+                                <TextBlock Text="{Binding Measurement}" Margin="0,0,5,0"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button HorizontalAlignment="Right" Click="FinalizeConfig_Click" Loaded="onLoadBtn"></Button>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

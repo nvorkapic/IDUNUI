@@ -62,7 +62,11 @@ namespace IDUNUI
             InitializeCheck();
             ConfigurationCheck();
 
-
+            if (Configuration.Count == 0)
+            {
+                ConfigurationListFillout();
+            }
+            
 
             if (!Credentialized) { Navigation.Add(new NavigationModel { ImagePath="Assets/Users.png", Page="Authorisation", PageType=typeof(LoginPage) }); }
             else
@@ -75,7 +79,7 @@ namespace IDUNUI
                     if (!Configured)
                     {
                         Navigation.Add(new NavigationModel { ImagePath = "Assets/tools.png", Page = "Configuration", PageType = typeof(ConfigurePage) });
-                        ConfigurationListFillout();
+                        
                         CMConfigListFillout();
            
                     }
@@ -96,21 +100,35 @@ namespace IDUNUI
 
         public async void LoadInitialization()
         {
-            StorageFile ConfigFile = await localFolder.GetFileAsync("Initialization.txt");
-            string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
+            try
+            {
+                StorageFile ConfigFile = await localFolder.GetFileAsync("Initialization.txt");
+                string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
 
-            InitializationInformation = JsonConvert.DeserializeObject<ObservableCollection<InitializationModel>>(ConfigText);
+                InitializationInformation = JsonConvert.DeserializeObject<ObservableCollection<InitializationModel>>(ConfigText);
+            }
+            catch
+            {
+
+            }
+           
         }
 
         public async void LoadConfiguration()
         {
-            
 
-            StorageFile ConfigFile = await localFolder.GetFileAsync("Configuration.txt");
-            string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
+            try
+            {
+                StorageFile ConfigFile = await localFolder.GetFileAsync("Configuration.txt");
+                string ConfigText = await FileIO.ReadTextAsync(ConfigFile);
 
-            ConfigurationListFillout();
-            CMConfigList = JsonConvert.DeserializeObject<ObservableCollection<CModel>>(ConfigText);
+                CMConfigList = JsonConvert.DeserializeObject<ObservableCollection<CModel>>(ConfigText);
+            }
+            catch
+            {
+                
+
+            }
 
             
         }
